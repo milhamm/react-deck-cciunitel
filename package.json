@@ -11,6 +11,9 @@
     "mdx-deck": "^4.1.1"
   },
   "dependencies": {
-    "code-surfer": "^3.1.1"
+    "code-surfer": "^3.1.1",
+    "mdx-deck-live-code": "^1.0.1",
+    "raw-loader": "^4.0.2",
+    "styled-components": "^5.3.3"
   }
 }

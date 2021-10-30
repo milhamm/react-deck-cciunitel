@@ -48,7 +48,8 @@ const Description = styled.p`
 const Main = styled.div`
   width: 100%;
   /* height: 300px; */
-  padding: 0 8rem;
+  padding: 1rem 4rem;
+  border-top: 1px solid #aaaa;
 `;
 
 const TitleWithDescription = ({ children, title, description = null }) => {

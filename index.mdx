@@ -1,11 +1,18 @@
 import { themes } from 'mdx-deck';
 import { CodeSurfer } from 'code-surfer';
 import { github } from '@code-surfer/themes';
+import { Flex, Box } from 'theme-ui';
 
 import Layout from './layouts/Layout';
 import TitleWithDescription from './layouts/TitleWithDescription';
 import myTheme from './themes';
 import codeTheme from './code-theme';
+
+export const styleBox = {
+  flex: '1 1 33%',
+  textAlign: 'left',
+  fontSize: '1.4rem',
+};
 
 export const theme = {
   ...myTheme,
@@ -324,6 +331,31 @@ h1 {
 
 ---
 
+<TitleWithDescription title="React" description="A JavaScript library for building user interfaces">
+
+<Flex p={1} style={{ padding: '' }}>
+  <Box p={4} sx={styleBox}>
+    <h3>Declarative</h3>
+    You tell the browser exactly what to do, instead of telling it what you need.
+  </Box>
+  <Box p={4} sx={styleBox}>
+    <h3>Component-based</h3>
+    Build encapsulated components that manage their own state, then compose them
+    to make complex UIs.
+  </Box>
+  <Box p={4} sx={styleBox}>
+    <h3>Learn once, use anywhere</h3>
+    You can use React anywhere. Develop mobile apps using React Native, Desktop app
+    using Electron
+  </Box>
+</Flex>
+
+We are going to make a simple TODO App.
+
+</TitleWithDescription>
+
+---
+
 <TitleWithDescription title="Setup">
 
 ```shell
@@ -374,14 +406,10 @@ Next step:
 
 <TitleWithDescription title="Getting Started" description="">
 
-<Steps>
-
 1. Create a new `index.js` inside `/src` directory
 2. Import `React` and `ReactDOM` libraries
 3. Create a Component
 4. Render the App
-
-</Steps>
 
 </TitleWithDescription>
 
@@ -443,9 +471,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 /* Create a new component */
-const App = () => {
-
-};
+const App = () => {};
 
 /* Render the App */
 ```
@@ -457,7 +483,7 @@ import ReactDOM from 'react-dom';
 
 /* Create a new component */
 const App = () => {
-    return <div>Hello There</div>
+  return <div>Hello There</div>;
 };
 
 /* Render the App */
@@ -470,7 +496,7 @@ import ReactDOM from 'react-dom';
 
 /* Create a new component */
 const App = () => {
-    return <div>Hello There</div>
+  return <div>Hello There</div>;
 };
 
 /* Render the App */
@@ -483,13 +509,11 @@ import ReactDOM from 'react-dom';
 
 /* Create a new component */
 const App = () => {
-    return <div>Hello There</div>
+  return <div>Hello There</div>;
 };
 
 /* Render the App */
-ReactDOM.render(
-
-)
+ReactDOM.render();
 ```
 
 ```jsx 12 title="Add the component that want to be rendered"
@@ -499,13 +523,11 @@ import ReactDOM from 'react-dom';
 
 /* Create a new component */
 const App = () => {
-    return <div>Hello There</div>
+  return <div>Hello There</div>;
 };
 
 /* Render the App */
-ReactDOM.render(
-    <App />,
-)
+ReactDOM.render(<App />);
 ```
 
 ```jsx 13 title="Specify the target"
@@ -515,14 +537,11 @@ import ReactDOM from 'react-dom';
 
 /* Create a new component */
 const App = () => {
-    return <div>Hello There</div>
+  return <div>Hello There</div>;
 };
 
 /* Render the App */
-ReactDOM.render(
-    <App />,
-    document.querySelector("#root")
-)
+ReactDOM.render(<App />, document.querySelector('#root'));
 ```
 
 ```jsx
@@ -532,14 +551,937 @@ import ReactDOM from 'react-dom';
 
 /* Create a new component */
 const App = () => {
-    return <div>Hello There</div>
+  return <div>Hello There</div>;
 };
 
 /* Render the App */
-ReactDOM.render(
-    <App />,
-    document.querySelector("#root")
-)
+ReactDOM.render(<App />, document.querySelector('#root'));
+```
+
+</CodeSurfer>
+
+---
+
+<TitleWithDescription title="JSX" description="A syntax extension to JavaScript">
+
+Consider this:
+
+```jsx
+const greetings = <div>Hello There</div>;
+```
+
+This funny tag syntax is neither a string nor HTML.
+
+1. JSX is not a templating language
+2. JSX is not HTML
+3. JSX is not XML
+
+</TitleWithDescription>
+
+---
+
+### ES2015 JS →❌ Browser
+
+(No guaranteed ES2015 Support)
+
+---
+
+### ES2015 JS → Babel → ES5 JS → Browser
+
+---
+
+<TitleWithDescription title="JSX (Cont.)">
+
+JS expressions can also be embedded inside JSX using curly braces `{}`, including variables, functions, and properties
+
+```jsx
+const name = 'Aang';
+const greetings = <div>Hello There</div>;
+```
+
+</TitleWithDescription>
+
+---
+
+<TitleWithDescription title="Components">
+
+React is a component-based library, which we can defined using **class component** or **functional component**
+
+```jsx
+const App = () => {
+  return <div>Hello There</div>;
+};
+```
+
+<Steps>
+
+Lets move these line from the `index.js` file and separate it into its own file called `App.js`
+
+</Steps>
+
+</TitleWithDescription>
+
+---
+
+<TitleWithDescription title="Create a new Component">
+
+Move the previous code here
+
+```jsx
+/* App.js */
+
+const App = () => {
+  return <div>Hello There</div>;
+};
+```
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* App.js */
+```
+
+```jsx
+/* App.js */
+
+const App = () => {
+  return <div>Hello There</div>;
+};
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+
+const App = () => {
+  return <div>Hello There</div>;
+};
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+
+const App = () => {
+  return <div>Hello There</div>;
+};
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+
+const App = () => {
+  return <div>Hello There</div>;
+};
+
+export default App;
+```
+
+```jsx
+/* index.js */
+```
+
+```jsx
+/* index.js */
+
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Render the App */
+ReactDOM.render(<App />, document.querySelector('#root'));
+```
+
+```jsx
+/* index.js */
+
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+
+/* Render the App */
+ReactDOM.render(<App />, document.querySelector('#root'));
+```
+
+</CodeSurfer>
+
+---
+
+<TitleWithDescription title="Create a Todo Component">
+
+We will create a new `Todo` component inside a `/components` directory
+
+This component will act as a container for the todo items
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx title="The new Todo.js file"
+/* Todo.js */
+```
+
+```jsx title="Create a blank functional component"
+/* Todo.js */
+import React from 'react';
+
+const Todo = () => {};
+
+export default Todo;
+```
+
+```jsx title="Add the list of todos"
+/* Todo.js */
+import React from 'react';
+
+const Todo = () => {
+  return (
+    <ul>
+      <li>Ngoding</li>
+      <li>Tidur</li>
+      <li>Kuliah</li>
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+```jsx
+/* App.js */
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+
+const App = () => {
+  return <div>Hello There</div>;
+};
+
+export default App;
+```
+
+```jsx title="Add the Todo component on our App component"
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  return <Todo />;
+};
+
+export default App;
+```
+
+</CodeSurfer>
+
+---
+
+<TitleWithDescription title="Props" description='Passing data from one component to another'>
+
+Now, we created a cool `Todo` component, but the data is still being hardcoded. We will handle the data by using props
+
+Note: Dataflow using props is **Unidirectional** and it is **Immutable**
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  return <Todo />;
+};
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+
+  return <Todo />;
+};
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+
+  return <Todo data={todosData} />;
+};
+
+export default App;
+```
+
+```jsx
+/* Todo.js */
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = () => {
+  return (
+    <ul>
+      <li>Ngoding</li>
+      <li>Tidur</li>
+      <li>Kuliah</li>
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data } = props;
+
+  return (
+    <ul>
+      <li>Ngoding</li>
+      <li>Tidur</li>
+      <li>Kuliah</li>
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data } = props;
+
+  return (
+    <ul>
+      {data.map((todo) => (
+        <li>{todo.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data } = props;
+
+  return (
+    <ul>
+      {data.map((todo, index) => (
+        <li key={index}>{todo.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+</CodeSurfer>
+
+---
+
+<TitleWithDescription title="State" description='Data that can be managed by a component in our app'>
+
+I personally recommend learning state using class-based component.
+Therefore, our `App` component will be converted into a class-based component
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+
+  return <Todo data={todosData} />;
+};
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+
+  return <Todo data={todosData} />;
+};
+
+class App extends React.Component {
+  // Empty Class
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+
+  return <Todo data={todosData} />;
+};
+
+class App extends React.Component {
+  render() {
+    // Add a render method
+  }
+}
+
+export default App;
+```
+
+```jsx 21
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+
+  return <Todo data={todosData} />;
+};
+
+class App extends React.Component {
+  render() {
+    // Add a render method
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+};
+
+class App extends React.Component {
+  render() {
+    return <Todo data={todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx 6:19
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const todosData = [
+    {
+      name: 'Ngoding',
+      completed: false,
+    },
+    {
+      name: 'Tidur',
+      completed: false,
+    },
+    {
+      name: 'Kuliah',
+      completed: false,
+    },
+  ];
+};
+
+class App extends React.Component {
+  render() {
+    return <Todo data={todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  //
+};
+
+class App extends React.Component {
+  render() {
+    const todosData = [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ];
+    return <Todo data={todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  render() {
+    const todosData = [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ];
+    return <Todo data={todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {};
+
+  render() {
+    const todosData = [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ];
+    return <Todo data={todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {};
+
+  render() {
+    return <Todo data={todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  render() {
+    return <Todo data={todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  render() {
+    return <Todo data={this.state.todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  render() {
+    return <Todo data={this.state.todosData} />;
+  }
+}
+
+export default App;
+```
+
+</CodeSurfer>
+
+---
+
+<TitleWithDescription title="Event Handling">
+
+Next we will learn how to respond to any click or changes
+
+</TitleWithDescription>
+
+---
+
+# Let's see this example
+
+<iframe
+  src='https://codesandbox.io/embed/dazzling-mcnulty-n5vzn?fontsize=18&hidenavigation=1&theme=dark'
+  style={{
+    width: '100%',
+    height: '800px',
+    padding: '0 64px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title='dazzling-mcnulty-n5vzn'
+  allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+  sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+/>
+
+---
+
+## Back to the TODO App 😉
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  render() {
+    return <Todo data={this.state.todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  handleDeleteTodo = (idx) => {
+    //
+  };
+
+  render() {
+    return <Todo data={this.state.todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  handleDeleteTodo = (idx) => {
+    //
+  };
+
+  render() {
+    return (
+      <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+    );
+  }
+}
+
+export default App;
 ```
 
 </CodeSurfer>
