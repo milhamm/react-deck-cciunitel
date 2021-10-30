@@ -332,6 +332,214 @@ npx create-react-app first-app
 cd first-app
 ```
 
+```shell
+npm run start
+# or
+yarn start
+```
+
 or use Codesandbox
 
 </TitleWithDescription>
+
+---
+
+<TitleWithDescription title="Folder Structure">
+
+```folder
+first-app/
+  public/
+    index.html
+    favicon.ico
+  src/
+    App.css
+    App.js
+    App.test.js
+    index.css
+    index.js
+    logo.svg
+```
+
+<Steps>
+
+Next step:
+
+**Delete** all files inside `/src` directory
+
+</Steps>
+
+</TitleWithDescription>
+
+---
+
+<TitleWithDescription title="Getting Started" description="">
+
+<Steps>
+
+1. Create a new `index.js` inside `/src` directory
+2. Import `React` and `ReactDOM` libraries
+3. Create a Component
+4. Render the App
+
+</Steps>
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx title="index.js file"
+/* Import React and ReactDOM libraries */
+
+/* Create a new component */
+
+/* Render the App */
+```
+
+```jsx 2:3
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+
+/* Render the App */
+```
+
+```jsx 2[1:6],3[1:6] title="We are going to import a library using ES Module"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+
+/* Render the App */
+```
+
+```jsx 2[7:13],3[7:16] title="The variable we want to assign this import to"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+
+/* Render the App */
+```
+
+```jsx 2[14:27],3[17:34] title="Specify the library that we want to import"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+
+/* Render the App */
+```
+
+```jsx 6:8 title="Creating a component by using function expression"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+const App = () => {
+
+};
+
+/* Render the App */
+```
+
+```jsx 7 title="Adding the JSX element inside the return statement"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+const App = () => {
+    return <div>Hello There</div>
+};
+
+/* Render the App */
+```
+
+```jsx 6:8 title="We have successfully create the component"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+const App = () => {
+    return <div>Hello There</div>
+};
+
+/* Render the App */
+```
+
+```jsx 11:13 title="We have successfully create the component"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+const App = () => {
+    return <div>Hello There</div>
+};
+
+/* Render the App */
+ReactDOM.render(
+
+)
+```
+
+```jsx 12 title="Add the component that want to be rendered"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+const App = () => {
+    return <div>Hello There</div>
+};
+
+/* Render the App */
+ReactDOM.render(
+    <App />,
+)
+```
+
+```jsx 13 title="Specify the target"
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+const App = () => {
+    return <div>Hello There</div>
+};
+
+/* Render the App */
+ReactDOM.render(
+    <App />,
+    document.querySelector("#root")
+)
+```
+
+```jsx
+/* Import React and ReactDOM libraries */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Create a new component */
+const App = () => {
+    return <div>Hello There</div>
+};
+
+/* Render the App */
+ReactDOM.render(
+    <App />,
+    document.querySelector("#root")
+)
+```
+
+</CodeSurfer>
