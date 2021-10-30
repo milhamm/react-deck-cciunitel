@@ -1,0 +1,13 @@
+{
+  "name": "react-deck",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "mdx-deck index.mdx",
+    "build": "mdx-deck build --basepath=\"/slides/react\" index.mdx"
+  },
+  "devDependencies": {
+    "mdx-deck": "^4.1.1"
+  }
+}
