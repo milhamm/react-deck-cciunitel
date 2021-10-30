@@ -41,12 +41,13 @@ const Title = styled.h2`
 `;
 
 const Description = styled.p`
-  max-width: 300px;
+  max-width: 500px;
   text-align: right;
 `;
 
 const Main = styled.div`
   width: 100%;
+  /* height: 300px; */
   padding: 0 8rem;
 `;
 
@@ -63,7 +64,7 @@ const TitleWithDescription = ({ children, title, description = null }) => {
           </Title>
           <Description>{description}</Description>
         </Header>
-        {description ? children : <Main>{children}</Main>}
+        {description ? <Main>{children}</Main> : <Main>{children}</Main>}
       </Container>
     </Center>
   );

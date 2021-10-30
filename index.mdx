@@ -1,8 +1,20 @@
+import { themes } from 'mdx-deck';
+import { CodeSurfer } from 'code-surfer';
+import { github } from '@code-surfer/themes';
+
 import Layout from './layouts/Layout';
 import TitleWithDescription from './layouts/TitleWithDescription';
 import myTheme from './themes';
+import codeTheme from './code-theme';
 
-export const theme = myTheme;
+export const theme = {
+  ...myTheme,
+  ...themes.prism,
+};
+
+<Head>
+  <title>Create your first React App - Muhammad Ilham Mubarak</title>
+</Head>
 
 <Layout title='Create your first React App'>
 
@@ -51,7 +63,275 @@ Presented by Muhammad Ilham Mubarak
 <TitleWithDescription title="Pre-requisite" >
 
 - [Node](https://nodejs.org/en/download/) >= 10
+- Text Editor (VSCode, Webstorm, Vim, etc.)
 
-Since we are going to use `create-react-app`
+Since we are going to use `create-react-app`. Or alternatively you can use [Codesandbox](https://codesandbox.io/s/) using their React template
+
+</TitleWithDescription>
+
+---
+
+# Let's get started
+
+<Image
+  src='https://tenor.com/view/fish-wiggle-anxiety-terror-oh-gif-11087344.gif'
+  style={{
+    width: '700px',
+    height: '600px',
+  }}
+/>
+
+---
+
+<TitleWithDescription title="HTML" description="The basic building block of the web">
+
+```html
+<h1>Title</h1>
+<p>Hi I'm a paragraph element</p>
+<a href="https://aang.dev">Visit Homepage</a>
+```
+
+<Steps>
+
+- `<h1>`, `<p>`, `<a>` are **elements**
+- `href` is an **attribute**
+
+</Steps>
+
+</TitleWithDescription>
+
+---
+
+<Split>
+
+<>
+
+### This is my personal website 😅
+
+![](https://i.imgur.com/N0pna7Y.png)
+
+</>
+
+<>
+
+```html
+<div>
+  <img src="asahi.png" alt="Asahi Hah" />
+</div>
+<h1>aang.dev</h1>
+<footer>
+  <div>
+    <a href="github.com/milhamm">Github</a>
+  </div>
+  <div>
+    <a href="linkedin.com/milhamm">Linkedin</a>
+  </div>
+  <div>
+    <a href="mailto:m.ilham.mubarak@gmail.com">Email</a>
+  </div>
+</footer>
+```
+
+</>
+
+</Split>
+
+---
+
+### Actually, this is the rendered result
+
+<Image
+  src='https://imgur.com/BNEe3tg.png'
+  style={{
+    width: '329px',
+    height: '344px',
+    objectFit: 'contain',
+  }}
+/>
+
+<Steps>
+
+How do we style it?
+
+We use **CSS**
+
+</Steps>
+
+---
+
+<TitleWithDescription title="CSS" description="Used to style your HTML">
+
+```css
+h1 {
+  color: white;
+  text-align: center;
+}
+```
+
+<Steps>
+
+- `h1` is a **[selector](https://www.w3schools.com/cssref/css_selectors.asp)**
+- `color` is a **property**
+- `white` is a **property value**
+
+</Steps>
+
+</TitleWithDescription>
+
+---
+
+# More about Selector
+
+| Name                  |    Example    |
+| :-------------------- | :-----------: |
+| Element selector      |      `p`      |
+| Class selector        | `.class-name` |
+| ID selector           |  `#id-name`   |
+| Attribute selector    |  `img[src]`   |
+| Pseudo-class selector |   `p:hover`   |
+
+---
+
+<CodeSurfer theme={github}>
+
+```html
+<div>
+  <img src="asahi.png" alt="Asahi Hah" />
+</div>
+<h1>aang.dev</h1>
+<footer>
+  <div>
+    <a href="github.com/milhamm">Github</a>
+  </div>
+  <div>
+    <a href="linkedin.com/milhamm">Linkedin</a>
+  </div>
+  <div>
+    <a href="mailto:m.ilham.mubarak@gmail.com">Email</a>
+  </div>
+</footer>
+```
+
+```html 17:19 title="We could add a style element or add it using link"
+<div>
+  <img src="asahi.png" alt="Asahi Hah" />
+</div>
+<h1>aang.dev</h1>
+<footer>
+  <div>
+    <a href="github.com/milhamm">Github</a>
+  </div>
+  <div>
+    <a href="linkedin.com/milhamm">Linkedin</a>
+  </div>
+  <div>
+    <a href="mailto:m.ilham.mubarak@gmail.com">Email</a>
+  </div>
+</footer>
+
+<style></style>
+```
+
+```html 17:25 title="Defining the CSS Variables"
+<div>
+  <img src="asahi.png" alt="Asahi Hah" />
+</div>
+<h1>aang.dev</h1>
+<footer>
+  <div>
+    <a href="github.com/milhamm">Github</a>
+  </div>
+  <div>
+    <a href="linkedin.com/milhamm">Linkedin</a>
+  </div>
+  <div>
+    <a href="mailto:m.ilham.mubarak@gmail.com">Email</a>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --image-width: 400px;
+    --image-height: 160px;
+    --background-color: rgb(255, 255, 255);
+    --font-color: black;
+    --font-color-link: rgb(77, 74, 251);
+  }
+</style>
+```
+
+```html 17:60 title="Add the rest of the CSS"
+<div>
+  <img src="asahi.png" alt="Asahi Hah" />
+</div>
+<h1>aang.dev</h1>
+<footer>
+  <div>
+    <a href="github.com/milhamm">Github</a>
+  </div>
+  <div>
+    <a href="linkedin.com/milhamm">Linkedin</a>
+  </div>
+  <div>
+    <a href="mailto:m.ilham.mubarak@gmail.com">Email</a>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --image-width: 400px;
+    --image-height: 160px;
+    --background-color: rgb(255, 255, 255);
+    --font-color: black;
+    --font-color-link: rgb(77, 74, 251);
+  }
+
+  img {
+    width: var(--image-width);
+    height: var(--image-height);
+    overflow: hidden;
+    object-fit: contain;
+  }
+
+  h1 {
+    color: var(--font-color);
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 100;
+  }
+
+  footer {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+  }
+
+  a {
+    font-size: 1.2rem;
+    color: var(--font-color-link);
+    font-weight: 400;
+  }
+</style>
+```
+
+</CodeSurfer>
+
+---
+
+# Onwards to React
+
+---
+
+<TitleWithDescription title="Setup">
+
+```shell
+npx create-react-app first-app
+
+cd first-app
+```
+
+or use Codesandbox
 
 </TitleWithDescription>

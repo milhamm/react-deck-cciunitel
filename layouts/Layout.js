@@ -7,7 +7,7 @@ const Title = styled.h1`
   font-size: 3em;
   margin-top: 0;
   margin-bottom: 4rem;
-  & > * {
+  & > span {
     display: inline-block;
     background-image: linear-gradient(
       transparent 55%,
