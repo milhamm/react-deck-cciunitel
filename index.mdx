@@ -5,6 +5,7 @@ import { Flex, Box } from 'theme-ui';
 
 import Layout from './layouts/Layout';
 import TitleWithDescription from './layouts/TitleWithDescription';
+import SplitLayout from './layouts/Split';
 import myTheme from './themes';
 import codeTheme from './code-theme';
 
@@ -57,7 +58,7 @@ Presented by Muhammad Ilham Mubarak
   - Component
   - State
   - Props
-  - Hooks
+  - Event Handling
 
 </Steps>
 
@@ -345,8 +346,8 @@ h1 {
   </Box>
   <Box p={4} sx={styleBox}>
     <h3>Learn once, use anywhere</h3>
-    You can use React anywhere. Develop mobile apps using React Native, Desktop app
-    using Electron
+    You can use React anywhere. Develop mobile apps using React Native or to create
+    slides like this
   </Box>
 </Flex>
 
@@ -906,6 +907,80 @@ const Todo = (props) => {
 export default Todo;
 ```
 
+</CodeSurfer>
+
+---
+
+<TitleWithDescription title="List and Keys">
+
+Let’s review how you transform lists in JavaScript.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map((number) => number * 2);
+console.log(doubled);
+// [2, 4, 6, 8, 10]
+```
+
+`map()` method allows you to iterate over an array and modify its elements using a callback function then return the new array
+
+</TitleWithDescription>
+
+---
+
+<TitleWithDescription title="List and Keys (Cont.)">
+
+We can do the same for JSX elements
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) => <li>{number}</li>);
+
+return <ul>{listItems}</ul>;
+```
+
+</TitleWithDescription>
+
+---
+
+<TitleWithDescription title="List and Keys (Cont.)">
+
+How about **keys?** Keys help react to identify any changes that happens in an item.
+
+```js
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number, index) => <li key={index}>{number}</li>);
+
+return <ul>{listItems}</ul>;
+```
+
+Note: Using index as the keys is not recommended. For the sake of simplicity, we will use index as the keys.
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data } = props;
+
+  return (
+    <ul>
+      <li>Ngoding</li>
+      <li>Tidur</li>
+      <li>Kuliah</li>
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
 ```jsx
 /* Todo.js */
 import React from 'react';
@@ -1435,12 +1510,49 @@ class App extends React.Component {
     ],
   };
 
-  handleDeleteTodo = (idx) => {
+  handleDeleteTodo = () => {
     //
   };
 
   render() {
     return <Todo data={this.state.todosData} />;
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  handleDeleteTodo = () => {
+    //
+  };
+
+  render() {
+    return (
+      <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+    );
   }
 }
 
@@ -1484,4 +1596,1649 @@ class App extends React.Component {
 export default App;
 ```
 
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  render() {
+    return (
+      <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+    );
+  }
+}
+
+export default App;
+```
+
 </CodeSurfer>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* Todo.js */
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data } = props;
+
+  return (
+    <ul>
+      {data.map((todo, index) => (
+        <li key={index}>{todo.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data, deleteTodo } = props;
+
+  return (
+    <ul>
+      {data.map((todo, index) => (
+        <li key={index}>{todo.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data, deleteTodo } = props;
+
+  return (
+    <ul>
+      {data.map((todo, index) => (
+        <li key={index} onClick={() => deleteTodo(index)}>
+          {todo.name}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+export default Todo;
+```
+
+</CodeSurfer>
+
+---
+
+# Our Progress
+
+<iframe
+  src='https://codesandbox.io/embed/quiet-https-r9dnc?fontsize=18&hidenavigation=1&theme=dark'
+  style={{
+    width: '100%',
+    height: '800px',
+    padding: '0 64px',
+    border: 0,
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title='dazzling-mcnulty-n5vzn'
+  allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+  sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+/>
+
+---
+
+Let's continue
+
+---
+
+<TitleWithDescription title="Forms and Inputs">
+
+Our App is not that great right now. Next up, we will learn how to handle forms to add data to the TODO
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [
+      {
+        name: 'Ngoding',
+        completed: false,
+      },
+      {
+        name: 'Tidur',
+        completed: false,
+      },
+      {
+        name: 'Kuliah',
+        completed: false,
+      },
+    ],
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  render() {
+    return (
+      <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  render() {
+    return (
+      <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <form>
+          <input type='text' />
+          <button type='submit'>Submit</button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <form>
+          <input type='text' value={this.state.name} />
+          <button type='submit'>Submit</button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <form>
+          <input
+            type='text'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button type='submit'>Submit</button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <form>
+          <input
+            type='text'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button type='submit'>Submit</button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    //
+  };
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type='text'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button type='submit'>Submit</button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+  };
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type='text'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button type='submit'>Submit</button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState({
+      todosData: [...this.state.todosData, newTodo],
+      name: '',
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type='text'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button type='submit'>Submit</button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+</CodeSurfer>
+
+---
+
+<Image
+  src='https://c.tenor.com/8ZDLU43omvcAAAAC/kid-thumbs-up.gif'
+  style={{
+    width: '260px',
+    height: '194px',
+  }}
+/>
+
+### Cool, now our App is looking more like a TODO app
+
+<Steps>
+
+### Next we will style our App using [bootstrap](https://getbootstrap.com/)
+
+</Steps>
+
+---
+
+<TitleWithDescription title="Adding a Library">
+
+Setup:
+
+```shell
+npm install bootstrap
+# or
+yarn add bootstrap
+```
+
+</TitleWithDescription>
+
+---
+
+# Import the bootstrap css
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+```
+
+---
+
+<TitleWithDescription title='Live Styling' fluid>
+
+<iframe
+  src='https://codesandbox.io/embed/xenodochial-ganguly-60ury?fontsize=14&hidenavigation=1&theme=dark'
+  style={{
+    width: '100%',
+    height: '800px',
+    border: 0,
+    margin: '0 auto',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title='dazzling-mcnulty-n5vzn'
+  allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+  sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+/>
+
+</TitleWithDescription>
+
+---
+
+## The result:
+
+<iframe
+  src='https://codesandbox.io/embed/late-wave-1guxp?fontsize=14&hidenavigation=1&theme=dark'
+  style={{
+    width: '100%',
+    height: '800px',
+    border: 0,
+    margin: '0 auto',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title='dazzling-mcnulty-n5vzn'
+  allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+  sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+/>
+
+---
+
+### What's next?
+
+<Steps>
+
+- Make some minor improvements
+- Learn about lifecycle
+- Learn about hooks
+
+</Steps>
+
+---
+
+<TitleWithDescription title='Conditional Rendering' description="Choose what to render based on the state or props">
+
+<Image
+  src='https://i.imgur.com/jyO3PvG.png'
+  style={{
+    width: '480px',
+    height: '200px',
+  }}
+/>
+
+</TitleWithDescription>
+
+---
+
+<TitleWithDescription title='Conditional Rendering (Cont.)' description="Choose what to render based on the state or props">
+
+But first, let's talk briefly about **ternary operations**
+
+```js
+function getHarga(isDiskon) {
+  return isDiskon ? 50 : 100;
+}
+
+console.log(getHarga(true)); // 50
+console.log(getHarga(false)); // 100
+```
+
+_(condition ? true : false)_
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data, deleteTodo } = props;
+
+  return (
+    <div className='mt-4'>
+      <h4>TODOS:</h4>
+      <ul className='list-group'>
+        {data.map((todo, index) => (
+          <li
+            className='d-flex justify-content-between align-items-center list-group-item'
+            key={index}
+          >
+            <span>{todo.name}</span>
+            <button
+              onClick={() => deleteTodo(index)}
+              className='btn btn-danger'
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default Todo;
+```
+
+```jsx
+/* Todo.js */
+import React from 'react';
+
+const Todo = (props) => {
+  const { data, deleteTodo } = props;
+
+  return (
+    <div className='mt-4'>
+      <h4>TODOS:</h4>
+      <ul className='list-group'>
+        {data.length
+          ? data.map((todo, index) => (
+              <li
+                className='d-flex justify-content-between align-items-center list-group-item'
+                key={index}
+              >
+                <span>{todo.name}</span>
+                <button
+                  onClick={() => deleteTodo(index)}
+                  className='btn btn-danger'
+                >
+                  Delete
+                </button>
+              </li>
+            ))
+          : 'No Todo Available'}
+      </ul>
+    </div>
+  );
+};
+
+export default Todo;
+```
+
+</CodeSurfer>
+
+---
+
+<TitleWithDescription title='React Lifecycle' description="Birth, Growth, and Death cycle of a component">
+
+In React, components go through a lifecycle of events:
+
+1. Mounting
+2. Updating
+3. Unmounting
+
+</TitleWithDescription>
+
+---
+
+### More about Lifecycle
+
+<iframe
+  src='https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/'
+  style={{
+    width: '1400px',
+    height: '650px',
+    overflow: 'hidden',
+    border: 0,
+  }}
+/>
+
+---
+
+<TitleWithDescription title='React Lifecycle (Cont.)' description="Birth, Growth, and Death cycle of a component">
+
+We will save our Todos locally using `localstorage` and utilize one of React's lifecycle `componentDidMount` to fetch the saved data.
+
+</TitleWithDescription>
+
+---
+
+<CodeSurfer theme={github}>
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState({
+      todosData: [...this.state.todosData, newTodo],
+      name: '',
+    });
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState({
+      todosData: [...this.state.todosData, newTodo],
+      name: '',
+    });
+
+    localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState(
+      {
+        todosData: [...this.state.todosData, newTodo],
+        name: '',
+      },
+      () => {
+        localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+      }
+    );
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  componentDidMount() {
+    //
+  }
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState(
+      {
+        todosData: [...this.state.todosData, newTodo],
+        name: '',
+      },
+      () => {
+        localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+      }
+    );
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  componentDidMount() {
+    const todoLocal = JSON.parse(localStorage.getItem('todosData'));
+
+    this.setState({
+      todosData: todoLocal,
+    });
+  }
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState(
+      {
+        todosData: [...this.state.todosData, newTodo],
+        name: '',
+      },
+      () => {
+        localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+      }
+    );
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx 44:46
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  componentDidMount() {
+    const todoLocal = JSON.parse(localStorage.getItem('todosData'));
+
+    this.setState({
+      todosData: todoLocal,
+    });
+  }
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState(
+      {
+        todosData: [...this.state.todosData, newTodo],
+        name: '',
+      },
+      () => {
+        localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+      }
+    );
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx 31
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  componentDidMount() {
+    const todoLocal = JSON.parse(localStorage.getItem('todosData'));
+
+    this.setState({
+      todosData: todoLocal,
+    });
+  }
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState(
+      {
+        todosData: [...this.state.todosData, newTodo],
+        name: '',
+      },
+      () => {
+        localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+      }
+    );
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  componentDidMount() {
+    const todoLocal = JSON.parse(localStorage.getItem('todosData'));
+
+    this.setState({
+      todosData: todoLocal,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    //
+  }
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState({
+      todosData: [...this.state.todosData, newTodo],
+      name: '',
+    });
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+```jsx
+/* App.js */
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  componentDidMount() {
+    const todoLocal = JSON.parse(localStorage.getItem('todosData'));
+
+    this.setState({
+      todosData: todoLocal,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.todosData != this.state.todosData) {
+      localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+    }
+  }
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState({
+      todosData: [...this.state.todosData, newTodo],
+      name: '',
+    });
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+</CodeSurfer>
+
+---
+
+### Progress Check
+
+<iframe
+  src='https://codesandbox.io/embed/tender-nova-f98ce?fontsize=14&hidenavigation=1&theme=dark'
+  style={{
+    width: '100%',
+    height: '800px',
+    border: 0,
+    margin: '0 auto',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title='dazzling-mcnulty-n5vzn'
+  allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+  sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'
+/>
+
+---
+
+### That's it !! 🥳
+
+You have successfully created your first React App
+
+---
+
+<Layout title='Thank you'>
+
+Any Question?
+
+###### github.com/milhamm | linkedin.com/in/milhamm | Aang#7697
+
+</Layout>
+
+---
+
+Resource:
+
+- Slides: [https://react-deck.aang.dev](https://react-deck.aang.dev)
+- References:
+  - [React Official Docs](https://reactjs.org/docs/getting-started.html)
+  - [Modern React and Redux by Stephen Grider](https://www.udemy.com/course/react-redux)
+  - [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/HTML)
+  - [React lifecycle methods by Ohans Emanuel](https://blog.logrocket.com/react-lifecycle-methods-tutorial-examples/)
+  - [React Tutorial: An Overview and Walkthrough by Tania Rascia](https://www.taniarascia.com/getting-started-with-react/)
+  - [The React Handbook](https://www.freecodecamp.org/news/the-react-handbook-b71c27b0a795/)
+  - [Tao of React](https://alexkondov.com/tao-of-react/)
+  - [React Developer Roadmap](https://roadmap.sh/react)
+  - [MDX Deck](https://github.com/jxnblk/mdx-deck)
+
+---
+
+# Advanced Topics
+
+1. Hooks
+2. Context
+3. Refs
+4. SSR (using Next.js)
+5. State Management (Redux, MobX)
+6. UI Libraries (AntDesign, ChakraUI)
+
+---
+
+<TitleWithDescription
+  title='Hooks'
+  description='A special function that lets you "hook into" React features'
+></TitleWithDescription>
+
+---
+
+<SplitLayout>
+
+<>
+
+<CodeSurfer theme={github}>
+
+```jsx
+import React from 'react';
+import Todo from './components/Todo';
+
+class App extends React.Component {
+  state = {
+    todosData: [],
+    name: '',
+  };
+
+  componentDidMount() {
+    const todoLocal = JSON.parse(localStorage.getItem('todosData'));
+
+    this.setState({
+      todosData: todoLocal,
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.todosData != this.state.todosData) {
+      localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+    }
+  }
+
+  handleDeleteTodo = (idx) => {
+    this.setState({
+      todosData: this.state.todosData.filter((todo, index) => idx != index),
+    });
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: this.state.name,
+      completed: false,
+    };
+
+    this.setState({
+      todosData: [...this.state.todosData, newTodo],
+      name: '',
+    });
+  };
+
+  render() {
+    return (
+      <div className='container pt-4'>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className='form-control'
+            type='text'
+            placeholder='Enter a TODO'
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <button className='btn btn-primary btn-block mt-2' type='submit'>
+            Submit
+          </button>
+        </form>
+        <Todo data={this.state.todosData} deleteTodo={this.handleDeleteTodo} />
+      </div>
+    );
+  }
+}
+
+export default App;
+```
+
+</CodeSurfer>
+
+</>
+
+<>
+
+<CodeSurfer theme={github}>
+
+```jsx
+import React, { useState, useEffect } from 'react';
+import Todo from './components/Todo';
+
+const App = () => {
+  const [todosData, setTodosData] = useState([]);
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const todoLocal = JSON.parse(localStorage.getItem('todosData'));
+    setTodosData(todoLocal);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('todosData', JSON.stringify(this.state.todosData));
+  }, [todosData]);
+
+  const handleDeleteTodo = (idx) =>
+    setTodosData(todosData.filter((todo, index) => idx != index));
+  const handleChange = (event) => setName(event.target.value);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newTodo = {
+      name: name,
+      completed: false,
+    };
+
+    setTodosData([...this.state.todosData, newTodo]);
+    setName('');
+  };
+
+  return (
+    <div className='container pt-4'>
+      <form onSubmit={handleSubmit}>
+        <input
+          className='form-control'
+          type='text'
+          placeholder='Enter a TODO'
+          value={name}
+          onChange={handleChange}
+        />
+        <button className='btn btn-primary btn-block mt-2' type='submit'>
+          Submit
+        </button>
+      </form>
+      <Todo data={todosData} deleteTodo={handleDeleteTodo} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+</CodeSurfer>
+
+</>
+
+</SplitLayout>
+
+---
+
+<TitleWithDescription
+  title='Next.js'
+  description='Next.js has all the tools you need to make the Web. Faster.'
+>
+
+Fullstack React Framework
+
+1. Image Optimization
+2. Hybrid: SSG and SSR
+3. ISR (Incremental Static Regeneration)
+4. Fast Refresh
+5. File-system Routing
+6. API Routes
+7. Code Splitting and Bundling
+
+#### Also, good news for those who are interested using Next.js
+
+</TitleWithDescription>
+
+---
+
+# Next.js 12 is a beast
+
+<Steps>
+
+1. Rust Compiler: ~3x faster Fast Refresh and ~5x faster builds
+2. Middleware (beta)
+3. URL Imports (alpha)
+4. React Server Components (alpha)
+
+</Steps>
